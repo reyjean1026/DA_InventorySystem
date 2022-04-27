@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
   
 class ArticleController extends Controller
 {
@@ -23,8 +24,14 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $categoryname = $request->categoryname;
+
+        $articlecode = $request->articlecode;
+        $articlename = $request->articlename;
+        $categoryid = $request->categoryid;
+
         $displaycategory = DB::table('category')
         ->select('id','category_name')
         ->get();
@@ -39,7 +46,12 @@ class ArticleController extends Controller
                 'displaycategory' => $displaycategory,
                 'displayarticle' => $displayarticle
             ]
-        );
+        )
+        ->with('categoryname',$categoryname)
+        ->with('articlecode',$articlecode)
+        ->with('articlename',$articlename)
+        ->with('categoryid',$categoryid)
+        ;
     }
      
     /**
@@ -56,15 +68,30 @@ class ArticleController extends Controller
     {
         $categoryname = $request->categoryname;
 
-        $request->validate([
+        $messages =
+        [
+            'categoryname.required' => "Category Name is Required",
+        ];
+
+        $rules = [
             'categoryname' => 'required',
-        ]);
-    
-        $data=array('category_name'=>$categoryname);
-        DB::table('category')->insertOrIgnore($data);
-     
-        return redirect()->route('articles.index')
-                        ->with('success','Category created successfully.');
+        ];
+
+        $validate =  Validator::make($request->all(),$rules,$messages);
+
+        if($validate->fails()){
+
+            return redirect()->back()->withErrors($validate->messages())->withInput();
+        }
+        else {
+
+            $data=array('category_name'=>$categoryname);
+            DB::table('category')->insertOrIgnore($data);
+         
+            return redirect()->route('articles.index')
+                            ->with('success','Category created successfully.');
+        }
+       
     }
 
     public function articlestore(Request $request)
@@ -73,17 +100,36 @@ class ArticleController extends Controller
         $articlename = $request->articlename;
         $categoryid = $request->categoryid;
 
-        $request->validate([
+        /*$request->validate([
+            'categoryid' => 'required',
             'articlecode' => 'required',
             'articlename' => 'required',
+        ]);*/
+
+        $messages =
+        [
+            'categoryid.required' => "Category Name is Required",
+            'articlecode.required' => "Article Code is Required",
+            'articlename.required' => "Article Name is Required"
+        ];
+
+        $rules = [
             'categoryid' => 'required',
-        ]);
-    
+            'articlecode' => 'required',
+            'articlename' => 'required',
+        ];
+
+        $validate =  Validator::make($request->all(),$rules,$messages);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate->messages())->withInput();
+        }
+        else {
         $data=array('code'=>$articlecode,'article'=>$articlename,'category_id'=>$categoryid);
         DB::table('article')->insertOrIgnore($data);
      
         return redirect()->route('articles.index')
                         ->with('success','Article created successfully.');
+        }
     }
      
     /**

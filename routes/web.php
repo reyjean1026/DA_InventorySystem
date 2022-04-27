@@ -21,9 +21,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      * Home Routes
      */
     //Route::get('/', 'HomeController@index')->name('home.index');
-    Auth::routes();
-    Route::get('/', 'LoginController@show')->name('login.show');
-    Route::post('/', 'LoginController@login')->name('login.perform');
+    //Auth::routes();
+    Route::get('/login', 'LoginController@show')->name('login.show');
+    Route::post('/llogin', 'LoginController@login')->name('login.perform');
 
     Route::group(['middleware' => ['guest']], function() {
         /**
@@ -56,7 +56,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('categorystore','ArticleController@articles');
         Route::post('storecategory','ArticleController@categorystore');
       
-        Route::get('/inventory', 'InventoryController@index')->name('inventory.index');
+        /*Route::get('/inventory', 'InventoryController@index')->name('inventory.index');
         Route::get('inventorystore','InventoryController@inventory');
         Route::post('storeinventory','InventoryController@inventorystore');
 
@@ -64,9 +64,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('propertystore','PropertyController@property');
         Route::post('storeproperty','PropertyController@propertystore');
 
-        Route::get('/request', 'RequestController@index')->name('request.index');
+        Route::get('/request', 'RequestController@index')->name('request.index');*/
 
-        Route::get('/acquired', 'AcquiredController@index')->name('acquired.index');
+        Route::get('/inventory', 'AcquiredController@index')->name('acquired.index');
         Route::get('acquiredstore','AcquiredController@acquired');
         Route::post('storeacquired','AcquiredController@acquiredstore');
         Route::get('transfermodalstore','AcquiredController@acquired');
@@ -79,4 +79,4 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

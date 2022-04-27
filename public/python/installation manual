@@ -1,0 +1,6 @@
+install python
+install pip
+install openpyxl
+install PyMySQL
+pip install mysqlclient
+install xlrd

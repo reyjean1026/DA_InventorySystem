@@ -17,15 +17,48 @@
                         </ul>
                     </div>
                 @endif
-              
+        
         <div class="col-md-12">
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0"><b>ACQUIRED INFORMATION</b></p>
+                <p class="mb-0"><b>UPLOAD FILES HERE</b></p>
               </div>
             </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button id="test" name="test" class="btn btn-info btn-sm ms-auto">Download Template</button>
+                        </div>
+                    </div> 
+                </div>   
+                <div class="row"> 
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="file" class="form-control" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        </div>
+                    </div> 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button id="test" name="test" class="btn btn-success btn-sm ms-auto">Submit File</button>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+          </div>
+        </div>
+
+        <div></div>
+      <br>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <p class="mb-0"><b>INPUT INVENTORY</b></p>
+              </div>
+            </div>
+            <div class="card-body">        
                 <form action="/storeacquired" method="POST" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
@@ -63,29 +96,29 @@
                     <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description"></textarea>
+                                    <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description">{{ old('description') }}</textarea>
                                 </div>
                             </div>
                     </div>
                     <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired">
+                                    <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired" value="{{ old('date_acquired') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number">
+                                    <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number" value="{{ old('propertynumber') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Unit of Measure">
+                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Unit of Measure" value="{{ old('unitofmeasure') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value">
+                                    <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}">
                                 </div>
                             </div>
                     </div>
@@ -102,12 +135,12 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="location" id="location" placeholder="Location">
+                                    <input class="form-control" autocomplete="off" type="text" name="location" id="location" placeholder="Location" value="{{ old('location') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" autocomplete="off" type="text" name="remarks" id="remarks" placeholder="Remarks"></textarea>
+                                    <textarea class="form-control" autocomplete="off" type="text" name="remarks" id="remarks" placeholder="Remarks">{{ old('remarks') }}</textarea>
                                 </div>
                             </div>
                     </div>
@@ -123,9 +156,9 @@
           </div>
         </div>
           
-      </div>
+      <div></div>
       <br>
-      <div class="row">
+    
         <div class="col-md-12">
           <div class="card">
             <div class="card-header pb-0">
@@ -289,7 +322,7 @@
             </div>
           </div>
         </div>     
-      </div>    
+        
    
 </div>
 
@@ -325,7 +358,7 @@
                                 <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <select class="form-control" name="transmodalregistered" id="transmodalregistered" style="width:100%">
+                                                <select class="form-control" name="transmodalregistered" id="transmodalregistered" style="width:100%" required>
                                                     <option value=''>Registered Employee?</option>                
                                                     <option value='YES'>YES</option> 
                                                     <option value='NO'>NO</option> 
@@ -347,12 +380,12 @@
                                 <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input class="form-control" autocomplete="off" type="date" name="transmodaltransferred_date" id="transmodaltransferred_date">
+                                                <input class="form-control" autocomplete="off" type="date" name="transmodaltransferred_date" id="transmodaltransferred_date" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <select class="form-control" name="transmodalstatusid" id="transmodalstatusid" style="width:100%">
+                                                <select class="form-control" name="transmodalstatusid" id="transmodalstatusid" style="width:100%" required>
                                                     <option value=''>Status of Equipment</option> 
                                                     <option value='SERVICIABLE'>SERVICIABLE</option> 
                                                     <option value='UNSERVICIABLE'>UNSERVICIABLE</option> 
@@ -365,7 +398,7 @@
                                        
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input class="form-control" autocomplete="off" type="text" name="transmodallocation" id="transmodallocation" placeholder="Location">
+                                                <input class="form-control" autocomplete="off" type="text" name="transmodallocation" id="transmodallocation" placeholder="Location" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

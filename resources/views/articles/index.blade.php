@@ -30,7 +30,7 @@
                     <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                        <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Name">
+                                        <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Name" value="{{ old('categoryname') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -100,12 +100,12 @@
                             </div> 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="articlecode" id="articlecode" placeholder="Article Code">
+                                    <input class="form-control" autocomplete="off" type="text" name="articlecode" id="articlecode" placeholder="Article Code" value="{{ old('articlecode') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="articlename" id="articlename" placeholder="Article Name">
+                                    <input class="form-control" autocomplete="off" type="text" name="articlename" id="articlename" placeholder="Article Name" value="{{ old('articlename') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
