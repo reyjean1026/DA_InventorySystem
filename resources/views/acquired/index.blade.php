@@ -221,7 +221,13 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">
-                                                                        <button type="button" class="badge badge-sm bg-gradient-primary btnSelect" id="ModalinputDatabaseName" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
+                                                                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action=""onsubmit="return confirm('Are you sure you wish to delete this record?');">
+                                                                            @csrf
+                                                                                <a class="badge badge-sm bg-gradient-primary" href="{{ url('acquired/'.$row->id.'/edit') }}">Edit</a>
+                                                                                <button type="submit" class="badge badge-sm bg-gradient-danger"> Delete</button>
+                                                                                <button type="button" class="badge badge-sm bg-gradient-info btnSelect" id="ModalinputDatabaseName" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
+                                                                                
+                                                                        </form>   
                                                                         </td>
                                                                     </tr>   
                                                                   @endforeach                 

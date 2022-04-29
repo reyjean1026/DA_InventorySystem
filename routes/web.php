@@ -78,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('storeacquired','AcquiredController@acquiredstore');
         Route::get('transfermodalstore','AcquiredController@acquired');
         Route::post('storemodaltransfer','AcquiredController@transfermodalstore');
+        Route::get('acquired/{id}/edit', 'AcquiredController@edit');
     });
 
     

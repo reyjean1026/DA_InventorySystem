@@ -315,4 +315,30 @@ class AcquiredController extends Controller
                         ->with('success','Article created successfully.');
 
     }
+
+    public function edit($id)
+    {
+        $displayproperty = DB::table('inventory')
+        ->select("inventory.id as id","category.category_name as category","article.id as articleid","article.article as article","inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
+        "inventory.date_acquired as date_acquired", 
+        "inventory.property_number as propertynumber",
+        "inventory.status as status","inventory.assigned_to as assigned_to","inventory.remarks as remarks",
+        "inventory.temp_name as tempname","inventory.registered_status as registeredstatus")
+        ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
+        ->leftJoin('category', 'category.id', '=', 'article.category_id')
+        ->where('inventory.id',$id)
+        ->get();
+
+        $displayarticle = DB::table('article')
+        ->select("article.id as id","article.code as code","article.article as article","category.category_name as categoryname")
+        ->leftJoin('category', 'category.id', '=', 'article.category_id')
+        ->get();
+
+        return view('acquired.edit',
+        [
+            'displayproperty'=>$displayproperty,
+            'displayarticle'=>$displayarticle
+        ]
+        );
+    }
 }
