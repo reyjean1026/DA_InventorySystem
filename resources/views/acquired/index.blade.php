@@ -18,7 +18,7 @@
                     </div>
                 @endif
         
-        <div class="col-md-12">
+     <!--   <div class="col-md-12">
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
@@ -50,7 +50,7 @@
         </div>
 
         <div></div>
-      <br>
+      <br>-->
         <div class="col-md-12">
           <div class="card">
             <div class="card-header pb-0">
@@ -133,12 +133,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="location" id="location" placeholder="Location" value="{{ old('location') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <div class="form-group">
                                     <textarea class="form-control" autocomplete="off" type="text" name="remarks" id="remarks" placeholder="Remarks">{{ old('remarks') }}</textarea>
                                 </div>
@@ -191,6 +186,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th hidden></th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Article</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Acquired</th>
@@ -201,7 +197,6 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered?</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Location</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -212,6 +207,7 @@
                                                                 @foreach ($displayproperty as $row) 
                                                                     <tr>
                                                                         <td hidden>{{$row->id}}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->category}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->article}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->description}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->date_acquired}}</td>
@@ -222,7 +218,6 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->registeredstatus}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->assigned_to}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->location}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">
@@ -234,6 +229,7 @@
                                                                 <tfoot>
                                                                     <tr>
                                                                         <th hidden></th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Article</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Acquired</th>
@@ -244,7 +240,6 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered?</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Location</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -268,7 +263,6 @@
                                                                         <th hidden></th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Number</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Received Date</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Location</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
@@ -282,7 +276,6 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center" hidden>{{$row->id}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->propnumber}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->receiveddate}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->location}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->regstatus}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->assigned}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
@@ -291,14 +284,13 @@
                                                                             <button type="button" class="badge badge-sm bg-gradient-primary btnSelect" id="ModalinputDatabaseName" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
                                                                         </td>
                                                                     </tr>
-                                                                 @endforeach   
+                                                                 @endforeach 
                                                                 </tbody>
                                                                 <tfoot>
                                                                     <tr>
                                                                         <th hidden></th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Number</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Received Date</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Location</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
@@ -485,7 +477,7 @@
                 //alert("sadasdasd");
                 var currentRow=$(this).closest("tr"); 
                 var id = currentRow.find("td:eq(0)").text();
-                var propnum = currentRow.find("td:eq(4)").text();
+                var propnum = currentRow.find("td:eq(5)").text();
                 $("#textid").val(id);
                 $("#modalpropnumber").html(propnum);
                 

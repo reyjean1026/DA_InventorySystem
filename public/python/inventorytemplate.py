@@ -100,4 +100,4 @@ data_val2.add('K2:K20000')
 
 wss.sheet_state = 'hidden'
 wsss.sheet_state = 'hidden'
-wb.save('InventoryTemplate.xlsx')
+wb.save('InventoryTemplate.csv')

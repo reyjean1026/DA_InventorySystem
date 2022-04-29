@@ -55,7 +55,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('storearticle','ArticleController@articlestore');
         Route::get('categorystore','ArticleController@articles');
         Route::post('storecategory','ArticleController@categorystore');
-      
+        Route::get('articles/{id}/edit', 'ArticleController@edit');
+        Route::put('articles/{id}', 'ArticleController@update');
+        Route::get('articles/{id}/editcategory', 'ArticleController@editcategory');
+        Route::put('articles/category/{id}', 'ArticleController@updatecategory');
+
+        Route::post('articles/deactivatecategory/{id}', 'ArticleController@deactivatecategory');
+        Route::post('articles/deactivate/{id}', 'ArticleController@deactivate');
+        
         /*Route::get('/inventory', 'InventoryController@index')->name('inventory.index');
         Route::get('inventorystore','InventoryController@inventory');
         Route::post('storeinventory','InventoryController@inventorystore');

@@ -34,11 +34,13 @@ class ArticleController extends Controller
 
         $displaycategory = DB::table('category')
         ->select('id','category_name')
+        ->where('status',1)
         ->get();
 
         $displayarticle = DB::table('article')
-        ->select("article.code as code","article.article as article","category.category_name as categoryname")
+        ->select("article.id as id","article.code as code","article.article as article","category.category_name as categoryname")
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
+        ->where('article.status',1)
         ->get();
 
        
@@ -140,6 +142,7 @@ class ArticleController extends Controller
      */
     public function show(Product $product)
     {
+      
         return view('articles.show',compact('product'));
     } 
      
@@ -149,11 +152,42 @@ class ArticleController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        return view('articles.edit',compact('product'));
+        $editdisplayarticle = DB::table('article')
+        ->select("article.id as id","category.id as catid","article.code as code","article.article as article","category.category_name as categoryname")
+        ->leftJoin('category', 'category.id', '=', 'article.category_id')
+        ->where('article.id',$id)
+        ->get();
+
+        $displaycategory = DB::table('category')
+        ->select('id','category_name')
+        ->where('status',1)
+        ->get();
+
+        return view('articles.edit',
+        [
+            'editdisplayarticle'=>$editdisplayarticle,
+            'displaycategory' => $displaycategory
+        ]
+        );
+    }
+
+    public function editcategory($id)
+    {
+        $editdisplaycategory = DB::table('category')
+        ->select("id","category_name")
+        ->where('id',$id)
+        ->get();
+
+        return view('articles.editcategory',
+        [
+            'editdisplaycategory'=>$editdisplaycategory
+        ]
+        );
     }
     
+
     /**
      * Update the specified resource in storage.
      *
@@ -161,17 +195,67 @@ class ArticleController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,$id)
     {
+        $code = $request->code;
+        $article = $request->article;
+        $categoryid = $request->categoryid;
+
+
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'categoryid' => 'required',
+            //'code' => 'required',
+            'article' => 'required',
         ]);
     
-        $product->update($request->all());
+        DB::table('article')
+        ->where('id', $id)
+        ->update(['code' => $code,
+                  'article'=>$article,
+                  'category_id'=>$categoryid,
+                ]);
     
         return redirect()->route('articles.index')
-                        ->with('success','Product updated successfully');
+                        ->with('success','Article updated successfully');
+    }
+
+    public function updatecategory(Request $request,$id)
+    {
+        $category_name = $request->category_name;
+
+
+        $request->validate([
+            'category_name' => 'required',
+        ]);
+    
+        DB::table('category')
+        ->where('id', $id)
+        ->update(['category_name' => $category_name,
+                ]);
+    
+        return redirect()->route('articles.index')
+                        ->with('success','Category updated successfully');
+    }
+    
+    public function deactivate($id)
+    {
+        DB::table('article')
+        ->where('id', $id)
+        ->update(['status' => 0,
+                ]);
+    
+        return redirect()->route('articles.index')
+                        ->with('success','Article deleted successfully');
+    }
+    public function deactivatecategory($id)
+    {
+        DB::table('category')
+        ->where('id', $id)
+        ->update(['status' => 0,
+                ]);
+    
+        return redirect()->route('articles.index')
+                        ->with('success','Category deleted successfully');
     }
     
     /**
@@ -180,9 +264,12 @@ class ArticleController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function delete($id)
     {
-        $product->delete();
+        DB::table('category')
+        ->where('id', $id)
+        ->update(['status' => 0,
+                ]);
     
         return redirect()->route('articles.index')
                         ->with('success','Product deleted successfully');

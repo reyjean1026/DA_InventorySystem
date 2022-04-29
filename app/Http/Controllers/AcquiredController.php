@@ -44,7 +44,7 @@ class AcquiredController extends Controller
         //Property
         //$statusid = $request->statusid;
         //$assignedto = $request->assignedto;
-        $location = $request->location;
+        //$location = $request->location;
         $remarks = $request->remarks;
         $tempname = $request->tempname;
         //$registered = $request->registered;
@@ -54,23 +54,21 @@ class AcquiredController extends Controller
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->get();
 
-        $displayproperty = DB::table('property_transfer')
-        ->select("property_transfer.id as id","article.article as article","inventory.description as description","inventory.unit_of_measure as unitmeasure","inventory.unit_value as value",
+        $displayproperty = DB::table('inventory')
+        ->select("inventory.id as id","category.category_name as category","article.article as article","inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
         "inventory.date_acquired as date_acquired", 
-        "inventory_logs.property_number as propertynumber",
-        "property_transfer.status as status","property_transfer.assigned_to as assigned_to","property_transfer.location as location","property_transfer.remarks as remarks",
-        "property_transfer.temp_name as tempname","property_transfer.registered_status as registeredstatus")
-        ->leftJoin('inventory_logs', 'inventory_logs.id', '=', 'property_transfer.id_inventory')
-        ->leftJoin('inventory', 'inventory.id', '=', 'inventory_logs.id_inventory')
+        "inventory.property_number as propertynumber",
+        "inventory.status as status","inventory.assigned_to as assigned_to","inventory.remarks as remarks",
+        "inventory.temp_name as tempname","inventory.registered_status as registeredstatus")
         ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
+        ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->get();
 
         $displaytransferredlogs = DB::table('property_logs')
-        ->select("property_transfer.id as id","inventory_logs.property_number as propnumber","property_logs.received_date as receiveddate","property_logs.location as location",
+        ->select("inventory.id as id","inventory.property_number as propnumber","property_logs.received_date as receiveddate",
         "property_logs.registered_status as regstatus","property_logs.assigned_to as assigned","property_logs.temp_name as tempname",
         "property_logs.status as status","property_logs.remarks as remarks")
-        ->leftJoin('property_transfer', 'property_transfer.id', '=', 'property_logs.property_id')
-        ->leftJoin('inventory_logs', 'inventory_logs.id', '=', 'property_transfer.id_inventory')
+        ->leftJoin('inventory', 'inventory.id', '=', 'property_logs.id_inventory')
         ->get();
 
         $displayemployee = DB::connection('mysql2')
@@ -91,7 +89,7 @@ class AcquiredController extends Controller
         ->with('unitvalue',$unitvalue)
         ->with('date_acquired',$date_acquired)
         ->with('propertynumber',$propertynumber)
-        ->with('location',$location)
+        //->with('location',$location)
         ->with('remarks',$remarks)
         ->with('tempname',$tempname)
         ;
@@ -112,7 +110,7 @@ class AcquiredController extends Controller
         //Property
         $statusid = $request->statusid;
         $assignedto = $request->assignedto;
-        $location = $request->location;
+        //$location = $request->location;
         $remarks = $request->remarks;
         $tempname = $request->tempname;
         $registered = $request->registered;
@@ -132,7 +130,7 @@ class AcquiredController extends Controller
                     'statusid.required' => "Status of Equipment is Required",
                     'assignedto.required' => "Assigned Employee is Required",
 
-                    'location.required' => "Location is Required",
+                    //'location.required' => "Location is Required",
                     //'remarks.required' => "Category Name is Required",
                     //'tempname.required' => "Temporary Name is Required",
 
@@ -152,7 +150,7 @@ class AcquiredController extends Controller
                     'statusid' => 'required',
                     'assignedto' => 'required',
 
-                    'location' => 'required',
+                    //'location' => 'required',
                     //'remarks' => 'required',
                     //'tempname' => 'required',
 
@@ -167,25 +165,12 @@ class AcquiredController extends Controller
                 }
                 else {
 
-                    $datainventory=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
-                    'unit_of_measure'=>$unitofmeasure,'unit_value'=>$unitvalue,'inputted'=>1);
-                    DB::table('inventory')->insertOrIgnore($datainventory);
-
-                    $getinventorymaxid =   DB::table('inventory')
-                    ->select(DB::raw("MAX(id) AS id"))
-                    ->value('id');
-
-                    $datainventorylogs=array('id_inventory'=>$getinventorymaxid,'property_number'=>$propertynumber);
-                    DB::table('inventory_logs')->insertOrIgnore($datainventorylogs);
-
-                    $getinventorylogsmaxid = DB::table('inventory_logs')
-                    ->select(DB::raw("MAX(id) AS id"))
-                    ->value('id');
-
-                    $dataproperty=array('id_inventory'=>$getinventorylogsmaxid,'received_date'=>$date_acquired,'location'=>$location,
-                    'assigned_to'=>$assignedto,'status'=>$statusid,'remarks'=>$remarks,
-                    'registered_status'=>$registered, 'temp_name'=>$tempname);
-                    DB::table('property_transfer')->insertOrIgnore($dataproperty);
+                    $datainventorycreate=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
+                    'property_number'=>$propertynumber, 'quantity'=>$unitofmeasure,'unit_value'=>$unitvalue,
+                    'received_date'=>"",'registered_status'=>$registered,'assigned_to'=>$assignedto,'temp_name'=>$tempname,
+                    'status'=>$statusid,'remarks'=>$remarks,
+                    );
+                    DB::table('inventory')->insertOrIgnore($datainventorycreate);
 
 
                     return redirect()->route('acquired.index')
@@ -209,7 +194,7 @@ class AcquiredController extends Controller
                     'statusid.required' => "Status of Equipment is Required",
                     //'assignedto.required' => "Assigned Employee is Required",
 
-                    'location.required' => "Location is Required",
+                    //'location.required' => "Location is Required",
                     //'remarks.required' => "Category Name is Required",
                     'tempname.required' => "Temporary Name is Required",
 
@@ -229,7 +214,7 @@ class AcquiredController extends Controller
                     'statusid' => 'required',
                     //'assignedto' => 'required',
 
-                    'location' => 'required',
+                    //'location' => 'required',
                     //'remarks' => 'required',
                     'tempname' => 'required',
 
@@ -244,27 +229,14 @@ class AcquiredController extends Controller
                 }
                 else {
 
-                    $datainventory=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
-                    'unit_of_measure'=>$unitofmeasure,'unit_value'=>$unitvalue,'inputted'=>1);
-                    DB::table('inventory')->insertOrIgnore($datainventory);
-            
-                    $getinventorymaxid =   DB::table('inventory')
-                    ->select(DB::raw("MAX(id) AS id"))
-                    ->value('id');
-            
-                    $datainventorylogs=array('id_inventory'=>$getinventorymaxid,'property_number'=>$propertynumber);
-                    DB::table('inventory_logs')->insertOrIgnore($datainventorylogs);
-            
-                    $getinventorylogsmaxid = DB::table('inventory_logs')
-                    ->select(DB::raw("MAX(id) AS id"))
-                    ->value('id');
-            
-                    $dataproperty=array('id_inventory'=>$getinventorylogsmaxid,'received_date'=>$date_acquired,'location'=>$location,
-                    'assigned_to'=>$assignedto,'status'=>$statusid,'remarks'=>$remarks,
-                    'registered_status'=>$registered, 'temp_name'=>$tempname);
-                    DB::table('property_transfer')->insertOrIgnore($dataproperty);
-            
-            
+                    $datainventorycreate=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
+                    'property_number'=>$propertynumber, 'quantity'=>$unitofmeasure,'unit_value'=>$unitvalue,
+                    'received_date'=>"",'registered_status'=>$registered,'assigned_to'=>$assignedto,'temp_name'=>$tempname,
+                    'status'=>$statusid,'remarks'=>$remarks,
+                    );
+                    DB::table('inventory')->insertOrIgnore($datainventorycreate);
+
+
                     return redirect()->route('acquired.index')
                                     ->with('success','Article created successfully.');
                 }
@@ -309,28 +281,28 @@ class AcquiredController extends Controller
         'registered_status'=>$transmodalregistered,'assigned_to'=>$transmodalassignedto,'temp_name'=>$transmodaltempname,'status'=>$transmodalstatusid,'remarks'=>$transmodalremarks);
         DB::table('property_logs')->insertOrIgnore($datainventory);*/
 
-        $datas = DB::table('property_transfer')
+        $datas = DB::table('inventory')
         ->where('id',$propertytransferid)
         ->first();
 
         $datasproperty_id = $datas->id;
-        $datasinventory_id = $datas->id_inventory;
+        //$datasinventory_id = $datas->id_inventory;
         $datasreceived_date = $datas->received_date;
-        $dataslocation = $datas->location;
+        //$dataslocation = $datas->location;
         $datasregistered_status = $datas->registered_status;
         $datasassigned_to = $datas->assigned_to;
         $datastemp_name = $datas->temp_name;
         $datasstatus = $datas->status;
         $datasremarks = $datas->remarks;
 
-        $datainventory=array('property_id'=>$datasproperty_id,'inventory_id'=>$datasinventory_id,'received_date'=>$datasreceived_date,'location'=>$dataslocation,
-        'registered_status'=>$datasregistered_status,'assigned_to'=>$datasassigned_to,'temp_name'=>$datastemp_name,'status'=>$datasstatus,'remarks'=>$datasremarks);
+        $datainventory=array('id_inventory'=>$datasproperty_id,'received_date'=>$datasreceived_date,'registered_status'=>$datasregistered_status,
+        'assigned_to'=>$datasassigned_to,'temp_name'=>$datastemp_name,'status'=>$datasstatus,'remarks'=>$datasremarks);
         DB::table('property_logs')->insertOrIgnore($datainventory);
 
-        DB::table('property_transfer')
+        DB::table('inventory')
             ->where('id', $propertytransferid)
             ->update(['received_date' => $transmodaltransferred_date,
-                      'location'=>$transmodallocation,
+                      //'id_location'=>$transmodallocation,
                       'registered_status'=>$transmodalregistered,
                       'assigned_to'=>$transmodalassignedto,
                       'temp_name'=>$transmodaltempname,
