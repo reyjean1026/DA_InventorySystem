@@ -59,13 +59,14 @@
               </div>
             </div>
             <div class="card-body">        
-                <form action="/storeacquired" method="POST" enctype="multipart/form-data">
+                <form action="/storeacquired" id="inventory" method="POST" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <p>Article</p>
                                     <select class="form-control" name="articleid" id="articleid" style="width:100%">
-                                        <option value=''>Select Article</option> 
+                                        <option value=''>Please Select</option> 
                                         @foreach ($displayarticle as $row)
                                         <option value='{{$row->id}}'>{{$row->article}}</option> 
                                         @endforeach
@@ -74,8 +75,9 @@
                             </div> 
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <p>Registered Employee?</p>
                                     <select class="form-control" name="registered" id="registered" style="width:100%">
-                                        <option value=''>Registered Employee?</option>                
+                                        <option value=''>Please Select</option>                
                                         <option value='YES'>YES</option> 
                                         <option value='NO'>NO</option> 
                                     </select>
@@ -83,8 +85,9 @@
                             </div> 
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <p>Assigned to</p>
                                     <select class="form-control" name="assignedto" id="assignedto" style="width:100%">
-                                        <option value=''>Assigned to</option> 
+                                        <option value=''>Please Select</option> 
                                         @foreach ($displayemployee as $row)
                                         <option value='{{$row->id}}'>{{$row->fullname}}</option> 
                                         @endforeach
@@ -96,6 +99,7 @@
                     <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                <p>Description</p>
                                     <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description">{{ old('description') }}</textarea>
                                 </div>
                             </div>
@@ -103,38 +107,50 @@
                     <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <p>Date acquired</p>
                                     <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired" value="{{ old('date_acquired') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <p>Property Number</p>
                                     <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number" value="{{ old('propertynumber') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Unit of Measure" value="{{ old('unitofmeasure') }}">
+                                <p>Quantity</p>
+                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Quantity" value="{{ old('unitofmeasure') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <p>Unit Value</p>
                                     <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}">
                                 </div>
                             </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-3">
+                                <div class="form-group">
+                                <p>Received Date</p>
+                                    <input class="form-control" autocomplete="off" type="date" name="received_date" id="received_date">
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <p>Equipment Status</p>
                                     <select class="form-control" name="statusid" id="statusid" style="width:100%">
-                                        <option value=''>Status of Equipment</option> 
+                                        <option value=''>Please Select</option> 
                                         <option value='SERVICIABLE'>SERVICIABLE</option> 
                                         <option value='UNSERVICIABLE'>UNSERVICIABLE</option> 
                                         <option value='WASTE'>WASTE</option> 
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <div class="form-group">
+                                <p>Remarks</p>
                                     <textarea class="form-control" autocomplete="off" type="text" name="remarks" id="remarks" placeholder="Remarks">{{ old('remarks') }}</textarea>
                                 </div>
                             </div>
@@ -221,7 +237,7 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">
-                                                                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action=""onsubmit="return confirm('Are you sure you wish to delete this record?');">
+                                                                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ url('acquired/deactivate/'.$row->id) }}" onsubmit="return confirm('Are you sure you wish to delete this record?');">
                                                                             @csrf
                                                                                 <a class="badge badge-sm bg-gradient-primary" href="{{ url('acquired/'.$row->id.'/edit') }}">Edit</a>
                                                                                 <button type="submit" class="badge badge-sm bg-gradient-danger"> Delete</button>
@@ -335,7 +351,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="/storemodaltransfer" method="POST" enctype="multipart/form-data">
+            <form action="/storemodaltransfer" id="modalinventory" method="POST" enctype="multipart/form-data">
                                 @csrf
                 <div class="col-md-12">
                     <div class="card">
@@ -343,7 +359,7 @@
                         <div class="row">
                                     <div class="col-md-6">
                                        <div class="form-group">
-                                           Property Number
+                                       <p>Property Number</p>
                                            <span class="form-control" id="modalpropnumber" name="modalpropnumber"></span>
                                        </div>
                                      </div>    
@@ -356,8 +372,9 @@
                                 <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                            <p>Registered Employee?</p>
                                                 <select class="form-control" name="transmodalregistered" id="transmodalregistered" style="width:100%" required>
-                                                    <option value=''>Registered Employee?</option>                
+                                                    <option value=''>Please Select</option>                
                                                     <option value='YES'>YES</option> 
                                                     <option value='NO'>NO</option> 
                                                 </select>
@@ -365,8 +382,9 @@
                                         </div> 
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                            <p>Assigned to</p>
                                                 <select class="form-control" name="transmodalassignedto" id="transmodalassignedto" style="width:100%">
-                                                    <option value=''>Assigned to</option> 
+                                                    <option value="">Please Select</option> 
                                                     @foreach ($displayemployee as $row)
                                                     <option value='{{$row->id}}'>{{$row->fullname}}</option> 
                                                     @endforeach
@@ -378,13 +396,15 @@
                                 <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input class="form-control" autocomplete="off" type="date" name="transmodaltransferred_date" id="transmodaltransferred_date" required>
+                                            <p>Received Date</p>
+                                                <input class="form-control" autocomplete="off" type="date" name="transmodaltransferred_date" id="transmodaltransferred_date">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                            <p>Equipment Status</p>
                                                 <select class="form-control" name="transmodalstatusid" id="transmodalstatusid" style="width:100%" required>
-                                                    <option value=''>Status of Equipment</option> 
+                                                    <option value=''>Please Select</option> 
                                                     <option value='SERVICIABLE'>SERVICIABLE</option> 
                                                     <option value='UNSERVICIABLE'>UNSERVICIABLE</option> 
                                                     <option value='WASTE'>WASTE</option> 
@@ -396,11 +416,7 @@
                                        
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input class="form-control" autocomplete="off" type="text" name="transmodallocation" id="transmodallocation" placeholder="Location" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
+                                            <p>Remarks</p>
                                                 <textarea class="form-control" autocomplete="off" type="text" name="transmodalremarks" id="transmodalremarks" placeholder="Remarks"></textarea>
                                             </div>
                                         </div>
@@ -447,13 +463,12 @@
          
             $("#transmodalregistered").select2();
 
-            $("#registered").change(function () {
-                var reg = this.value;
-                if(reg=="YES"){
+            var test = $("#registered").val();
+                if(test=="YES"){
                     $("#assignedto").next().show();  
                     $("#tempname").hide();
                 }
-                else if (reg=="NO"){
+                else if (test=="NO"){
                     $("#assignedto").next().hide();
                     $("#tempname").show();
                 }
@@ -461,13 +476,71 @@
                     $("#tempname").hide();
                     $("#assignedto").next().hide();  
                 }
+
+            $("#registered").change(function () {
+                var reg = this.value;
+                if(reg=="YES"){
+                    $("#assignedto").next().show();  
+                    $("#tempname").hide();
+                    $('#tempname').val("");
+                }
+                else if (reg=="NO"){
+                    $("#assignedto").next().hide();
+                    $("#tempname").show();
+                    $("#assignedto")[0].selectedIndex ="";
+                }
+                else{
+                    $("#tempname").hide();
+                    $("#assignedto").next().hide();  
+                }
             });
+
+            $(function() {
+                $('#inventory').submit(function(e) {
+                    e.preventDefault();
+                    var test = $("#registered").val();
+                    var editassignedto = $('#assignedto').val();
+                    var edittempname = $('#tempname').val();
+                    if(test=="YES"){
+                        if (editassignedto.length < 1) {
+                        $('#assignedto').after('<span style="color:red">This field is required</span>');
+                        }
+                        else{
+                            e.currentTarget.submit();
+                        }
+                    }
+                    else if (test=="NO"){
+                        if (edittempname.length < 1) {
+                        $('#tempname').after('<span style="color:red">This field is required</span>');
+                        }
+                        else{
+                            e.currentTarget.submit();
+                        }
+                    } 
+
+                });
+            });
+
+            var test = $("#transmodalregistered").val();
+                if(test=="YES"){
+                    $("#transmodalassignedto").next().show();  
+                    $("#transmodaltempname").hide();
+                }
+                else if (test=="NO"){
+                    $("#transmodalassignedto").next().hide();
+                    $("#transmodaltempname").show();
+                }
+                else{
+                    $("#transmodaltempname").hide();
+                    $("#transmodalassignedto").next().hide();  
+                }
 
             $("#transmodalregistered").change(function () {
                 var modalreg = this.value;
                 if(modalreg=="YES"){
                     $("#transmodalassignedto").next().show();   
                     $("#transmodaltempname").hide();
+                    $('#transmodaltempname').val("");
                 }
                 else if (modalreg=="NO"){
                     $("#transmodaltempname").show();
@@ -476,8 +549,36 @@
                 else{
                     $("#transmodaltempname").hide();
                     $("#transmodalassignedto").next().hide();  
+                    $("#transmodalassignedto")[0].selectedIndex ="";
                 }
             });
+
+            $(function() {
+                $('#modalinventory').submit(function(e) {
+                    e.preventDefault();
+                    var test = $("#transmodalregistered").val();
+                    var editassignedto = $('#transmodalassignedto').val();
+                    var edittempname = $('#transmodaltempname').val();
+                    if(test=="YES"){
+                        if (editassignedto.length < 1) {
+                        $('#transmodalassignedto').after('<span style="color:red">This field is required</span>');
+                        }
+                        else{
+                            e.currentTarget.submit();
+                        }
+                    }
+                    else if (test=="NO"){
+                        if (edittempname.length < 1) {
+                        $('#transmodaltempname').after('<span style="color:red">This field is required</span>');
+                        }
+                        else{
+                            e.currentTarget.submit();
+                        }
+                    } 
+
+                });
+            });
+
             
             $("#tblassignedproperty").on('click','.btnSelect',function(){
                 //alert("sadasdasd");

@@ -62,6 +62,7 @@ class AcquiredController extends Controller
         "inventory.temp_name as tempname","inventory.registered_status as registeredstatus")
         ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
+        ->where('inventory.in_status',1)
         ->get();
 
         $displaytransferredlogs = DB::table('property_logs')
@@ -103,6 +104,7 @@ class AcquiredController extends Controller
         $unitofmeasure = $request->unitofmeasure;
         $unitvalue = $request->unitvalue;
         $date_acquired = $request->date_acquired;
+        $received_date = $request->received_date;
 
         //Inventory Logs
         $propertynumber = $request->propertynumber;
@@ -167,7 +169,7 @@ class AcquiredController extends Controller
 
                     $datainventorycreate=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
                     'property_number'=>$propertynumber, 'quantity'=>$unitofmeasure,'unit_value'=>$unitvalue,
-                    'received_date'=>"",'registered_status'=>$registered,'assigned_to'=>$assignedto,'temp_name'=>$tempname,
+                    'received_date'=>$received_date,'registered_status'=>$registered,'assigned_to'=>$assignedto,'temp_name'=>"",
                     'status'=>$statusid,'remarks'=>$remarks,
                     );
                     DB::table('inventory')->insertOrIgnore($datainventorycreate);
@@ -231,7 +233,7 @@ class AcquiredController extends Controller
 
                     $datainventorycreate=array('id_article'=>$articleid,'description'=>$description,'date_acquired'=>$date_acquired,
                     'property_number'=>$propertynumber, 'quantity'=>$unitofmeasure,'unit_value'=>$unitvalue,
-                    'received_date'=>"",'registered_status'=>$registered,'assigned_to'=>$assignedto,'temp_name'=>$tempname,
+                    'received_date'=>$received_date,'registered_status'=>$registered,'assigned_to'=>"",'temp_name'=>$tempname,
                     'status'=>$statusid,'remarks'=>$remarks,
                     );
                     DB::table('inventory')->insertOrIgnore($datainventorycreate);
@@ -319,9 +321,9 @@ class AcquiredController extends Controller
     public function edit($id)
     {
         $displayproperty = DB::table('inventory')
-        ->select("inventory.id as id","category.category_name as category","article.id as articleid","article.article as article","inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
-        "inventory.date_acquired as date_acquired", 
-        "inventory.property_number as propertynumber",
+        ->select("inventory.id as id","category.category_name as category","article.id as articleid","article.article as article",
+        "inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
+        "inventory.date_acquired as date_acquired","inventory.property_number as propertynumber","inventory.received_date as received_date",
         "inventory.status as status","inventory.assigned_to as assigned_to","inventory.remarks as remarks",
         "inventory.temp_name as tempname","inventory.registered_status as registeredstatus")
         ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
@@ -334,11 +336,69 @@ class AcquiredController extends Controller
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->get();
 
+        $displayemployee = DB::connection('mysql2')
+        ->table('tbl_user')
+        ->select("EMP_NO as id",DB::raw("CONCAT(NAME_F,' ',NAME_L) AS fullname"))
+        ->get();
+
         return view('acquired.edit',
         [
             'displayproperty'=>$displayproperty,
-            'displayarticle'=>$displayarticle
+            'displayarticle'=>$displayarticle,
+            'displayemployee' => $displayemployee
         ]
         );
+    }
+
+    public function update(Request $request,$id)
+    {
+        $editarticleid = $request->editarticleid;
+        $editregistered = $request->editregistered;
+        $editassignedto = $request->editassignedto;
+        $edittempname = $request->edittempname;
+        $editdescription = $request->editdescription;
+        $editdate_acquired = $request->editdate_acquired;
+        $editpropertynumber = $request->editpropertynumber;
+        $editunitofmeasure = $request->editunitofmeasure;
+        $editunitvalue = $request->editunitvalue;
+        $editstatusid = $request->editstatusid;
+        $editremarks = $request->editremarks;
+        $editreceived_date = $request->editreceived_date;
+
+
+        /*$request->validate([
+            'categoryid' => 'required',
+            //'code' => 'required',
+            'article' => 'required',
+        ]);*/
+    
+        DB::table('inventory')
+        ->where('id', $id)
+        ->update(['id_article' => $editarticleid,
+                  'description'=>$editdescription,
+                  'date_acquired'=>$editdate_acquired,
+                  'property_number'=>$editpropertynumber,
+                  'quantity'=>$editunitofmeasure,
+                  'unit_value'=>$editunitvalue,
+                  'received_date'=>$editreceived_date,
+                  'registered_status'=>$editregistered,
+                  'assigned_to'=>$editassignedto,
+                  'temp_name'=>$edittempname,
+                  'status'=>$editstatusid,
+                  'remarks'=>$editremarks,
+                ]);
+    
+        return redirect()->route('acquired.index')
+                        ->with('success','Inventory updated successfully');
+    }
+    public function deactivate($id)
+    {
+        DB::table('inventory')
+        ->where('id', $id)
+        ->update(['in_status' => 0,
+                ]);
+    
+        return redirect()->route('acquired.index')
+                        ->with('success','Inventory deleted successfully');
     }
 }
