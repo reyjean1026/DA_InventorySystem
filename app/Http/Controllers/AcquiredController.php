@@ -63,7 +63,8 @@ class AcquiredController extends Controller
         ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->where('inventory.in_status',1)
-        ->get();
+        ->get()
+        ->toArray();
 
         $displaytransferredlogs = DB::table('property_logs')
         ->select("inventory.id as id","inventory.property_number as propnumber","property_logs.received_date as receiveddate",

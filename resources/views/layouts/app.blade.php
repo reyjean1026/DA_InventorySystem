@@ -21,13 +21,13 @@
   <link href="{{asset('assets/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/assets/css/argon-dashboard.css?v=2.0.2')}}" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
-  <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="{{asset('assets/plugins/select2.min.css')}}" rel="stylesheet" /> 
+  <link href="{{asset('assets/plugins/jquery.dataTables.min.css')}}" rel="stylesheet" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="{{asset('assets/plugins/3.5.1.jquery.min.js')}}"></script> 
+  <script type="text/javascript" src="{{asset('assets/plugins/1.9.1.jquery.min.js')}}"></script>
+  <script src="{{asset('assets/plugins/jquery.dataTables.min.js')}}" crossorigin="anonymous"></script>
+  <script src="{{asset('assets/plugins/select2.min.js')}}"></script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">

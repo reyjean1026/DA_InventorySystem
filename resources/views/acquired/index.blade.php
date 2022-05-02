@@ -441,6 +441,8 @@
             $('#tblassignedproperty').DataTable({
                 scrollX:        true,
                 scrollCollapse: true,
+                ServerSide: true,
+                Processing: true,
                 columnDefs: [
                     { width: 200, targets: 0 }
                 ],
