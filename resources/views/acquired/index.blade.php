@@ -59,13 +59,13 @@
               </div>
             </div>
             <div class="card-body">        
-                <form action="/storeacquired" id="inventory" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('storeacquired') }}" id="inventory" method="POST" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <p>Article</p>
-                                    <select class="form-control" name="articleid" id="articleid" style="width:100%">
+                                    <select class="form-control" name="articleid" id="articleid" style="width:100%" required>
                                         <option value=''>Please Select</option> 
                                         @foreach ($displayarticle as $row)
                                         <option value='{{$row->id}}'>{{$row->article}}</option> 
@@ -76,7 +76,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <p>Registered Employee?</p>
-                                    <select class="form-control" name="registered" id="registered" style="width:100%">
+                                    <select class="form-control" name="registered" id="registered" style="width:100%" required>
                                         <option value=''>Please Select</option>                
                                         <option value='YES'>YES</option> 
                                         <option value='NO'>NO</option> 
@@ -100,7 +100,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                 <p>Description</p>
-                                    <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description" required>{{ old('description') }}</textarea>
                                 </div>
                             </div>
                     </div>
@@ -108,25 +108,25 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Date acquired</p>
-                                    <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired" value="{{ old('date_acquired') }}">
+                                    <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired" value="{{ old('date_acquired') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Property Number</p>
-                                    <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number" value="{{ old('propertynumber') }}">
+                                    <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number" value="{{ old('propertynumber') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Quantity</p>
-                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Quantity" value="{{ old('unitofmeasure') }}">
+                                    <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Quantity" value="{{ old('unitofmeasure') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Unit Value</p>
-                                    <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}">
+                                    <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}" required>
                                 </div>
                             </div>
                     </div>
@@ -140,7 +140,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Equipment Status</p>
-                                    <select class="form-control" name="statusid" id="statusid" style="width:100%">
+                                    <select class="form-control" name="statusid" id="statusid" style="width:100%" required>
                                         <option value=''>Please Select</option> 
                                         <option value='SERVICIABLE'>SERVICIABLE</option> 
                                         <option value='UNSERVICIABLE'>UNSERVICIABLE</option> 
@@ -351,7 +351,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="/storemodaltransfer" id="modalinventory" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('storemodaltransfer') }}" id="modalinventory" method="POST" enctype="multipart/form-data">
                                 @csrf
                 <div class="col-md-12">
                     <div class="card">

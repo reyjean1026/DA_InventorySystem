@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="card-body">
-                <form action="/storecategory" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('storecategory') }}" method="POST" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
                             <div class="col-md-6">
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="card-body">
-                 <form action="/storearticle" method="POST">
+                 <form action="{{ url('storearticle') }}" method="POST">
                      @csrf
                     <div class="row">
                             <div class="col-md-3">
