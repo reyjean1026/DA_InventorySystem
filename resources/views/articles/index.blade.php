@@ -30,7 +30,7 @@
                     <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                        <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Name" value="{{ old('categoryname') }}">
+                                        <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Name" value="{{ old('categoryname') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -94,7 +94,7 @@
                     <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <select class="form-control" name="categoryid" id="categoryid" style="width:100%">
+                                    <select class="form-control" name="categoryid" id="categoryid" style="width:100%" required>
                                         <option value=''>Select Category</option> 
                                         @foreach ($displaycategory as $row)
                                         <option value='{{$row->id}}'>{{$row->category_name}}</option> 
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" autocomplete="off" type="text" name="articlename" id="articlename" placeholder="Article Name" value="{{ old('articlename') }}">
+                                    <input class="form-control" autocomplete="off" type="text" name="articlename" id="articlename" placeholder="Article Name" value="{{ old('articlename') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">

@@ -50,7 +50,7 @@ class ArticleController extends Controller
             ]
         )
         ->with('categoryname',$categoryname)
-        ->with('articlecode',$articlecode)
+        //->with('articlecode',$articlecode)
         ->with('articlename',$articlename)
         ->with('categoryid',$categoryid)
         ;
@@ -111,13 +111,13 @@ class ArticleController extends Controller
         $messages =
         [
             'categoryid.required' => "Category Name is Required",
-            'articlecode.required' => "Article Code is Required",
+            //'articlecode.required' => "Article Code is Required",
             'articlename.required' => "Article Name is Required"
         ];
 
         $rules = [
             'categoryid' => 'required',
-            'articlecode' => 'required',
+            //'articlecode' => 'required',
             'articlename' => 'required',
         ];
 
