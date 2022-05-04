@@ -42,7 +42,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <button id="test" name="test" class="btn btn-success btn-sm ms-auto">Submit File</button>
-                        </div>
+                        </div>1
                     </div>
                 </div>      
             </div>
