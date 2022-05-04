@@ -55,23 +55,28 @@ class AcquiredController extends Controller
         ->get();
 
         $displayproperty = DB::table('inventory')
-        ->select("inventory.id as id","category.category_name as category","article.article as article","inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
-        "inventory.date_acquired as date_acquired", 
-        "inventory.property_number as propertynumber",
-        "inventory.status as status","inventory.assigned_to as assigned_to","inventory.remarks as remarks",
-        "inventory.temp_name as tempname","inventory.registered_status as registeredstatus")
-        ->leftJoin('article', 'article.id', '=', 'inventory.id_article')
-        ->leftJoin('category', 'category.id', '=', 'article.category_id')
-        ->where('inventory.in_status',1)
+        ->select(DB::raw("CONCAT(personneldb.tbl_user.NAME_F,' ',personneldb.tbl_user.NAME_L) AS fullname"),
+        "inventorydb.inventory.id as id","inventorydb.category.category_name as category","inventorydb.article.article as article",
+        "inventorydb.inventory.description as description","inventorydb.inventory.quantity as unitmeasure","inventorydb.inventory.unit_value as value",
+        "inventorydb.inventory.date_acquired as date_acquired","inventorydb.inventory.property_number as propertynumber",
+        "inventorydb.inventory.status as status","inventorydb.inventory.assigned_to as assigned_to","inventorydb.inventory.remarks as remarks",
+        "inventorydb.inventory.temp_name as tempname","inventorydb.inventory.registered_status as registeredstatus")
+        ->leftJoin('inventorydb.article', 'inventorydb.article.id', '=', 'inventorydb.inventory.id_article')
+        ->leftJoin('inventorydb.category', 'inventorydb.category.id', '=', 'inventorydb.article.category_id')
+        ->leftJoin('personneldb.tbl_user', 'personneldb.tbl_user.EMP_NO', '=', 'inventorydb.inventory.assigned_to')
+        ->where('inventorydb.inventory.in_status',1)
         ->get()
         ->toArray();
 
         $displaytransferredlogs = DB::table('property_logs')
-        ->select("inventory.id as id","inventory.property_number as propnumber","property_logs.received_date as receiveddate",
-        "property_logs.registered_status as regstatus","property_logs.assigned_to as assigned","property_logs.temp_name as tempname",
-        "property_logs.status as status","property_logs.remarks as remarks")
+        ->select(DB::raw("CONCAT(personneldb.tbl_user.NAME_F,' ',personneldb.tbl_user.NAME_L) AS fullname"),
+        "inventorydb.inventory.id as id","inventorydb.inventory.property_number as propnumber","inventorydb.property_logs.received_date as receiveddate",
+        "inventorydb.property_logs.registered_status as regstatus","inventorydb.property_logs.assigned_to as assigned","inventorydb.property_logs.temp_name as tempname",
+        "inventorydb.property_logs.status as status","inventorydb.property_logs.remarks as remarks")
         ->leftJoin('inventory', 'inventory.id', '=', 'property_logs.id_inventory')
-        ->get();
+        ->leftJoin('personneldb.tbl_user', 'personneldb.tbl_user.EMP_NO', '=', 'inventorydb.property_logs.assigned_to')
+        ->get()
+        ->toArray();
 
         $displayemployee = DB::connection('mysql2')
         ->table('tbl_user')
@@ -177,7 +182,7 @@ class AcquiredController extends Controller
 
 
                     return redirect()->route('acquired.index')
-                                    ->with('success','Article created successfully.');
+                                    ->with('success','Inventory created successfully.');
                 }
 
         }
@@ -241,7 +246,7 @@ class AcquiredController extends Controller
 
 
                     return redirect()->route('acquired.index')
-                                    ->with('success','Article created successfully.');
+                                    ->with('success','Inventory created successfully.');
                 }
 
         }
@@ -315,7 +320,7 @@ class AcquiredController extends Controller
 
         //print_r($datainventory);
         return redirect()->route('acquired.index')
-                        ->with('success','Article created successfully.');
+                        ->with('success','Inventory created successfully.');
 
     }
 

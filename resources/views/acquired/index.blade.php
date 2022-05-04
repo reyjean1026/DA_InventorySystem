@@ -232,7 +232,7 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->value}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center"></td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->registeredstatus}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->assigned_to}}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->fullname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
@@ -289,7 +289,7 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                                                         <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>-->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -299,12 +299,12 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->propnumber}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->receiveddate}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->regstatus}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->assigned}}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->fullname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">
+                                                                        <!--<td class="text-secondary text-xs font-weight-bold align-middle text-center">
                                                                             <button type="button" class="badge badge-sm bg-gradient-primary btnSelect" id="ModalinputDatabaseName" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
-                                                                        </td>
+                                                                        </td>-->
                                                                     </tr>
                                                                  @endforeach 
                                                                 </tbody>
@@ -317,7 +317,7 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
-                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>-->
                                                                     </tr>
                                                                 </tfoot>
                                                             </table>
