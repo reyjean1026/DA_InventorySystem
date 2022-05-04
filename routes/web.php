@@ -22,10 +22,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      */
     //Route::get('/', 'HomeController@index')->name('home.index');
     //Auth::routes();
-    Route::get('/login', 'LoginController@show')->name('login.show');
-    Route::post('/llogin', 'LoginController@login')->name('login.perform');
+   // Route::get('/login', 'LoginController@show')->name('login.show');
+   // Route::post('/login', 'LoginController@login')->name('login.perform');
 
-    Route::group(['middleware' => ['guest']], function() {
+    /*Route::group(['middleware' => ['guest']], function() {
         /**
          * Register Routes
          */
@@ -35,10 +35,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Login Routes
          */
-        Route::get('/login', 'LoginController@show')->name('login.show');
-        Route::post('/login', 'LoginController@login')->name('login.perform');
+      //  Route::get('/login', 'LoginController@show')->name('login.show');
+      //  Route::post('/login', 'LoginController@login')->name('login.perform');
 
-    });
+    //});
 
     Route::group(['middleware' => ['auth']], function() {
         /**
@@ -90,3 +90,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
