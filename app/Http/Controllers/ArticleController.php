@@ -27,13 +27,14 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $categoryname = $request->categoryname;
+        $categorycode = $request->categorycode;
 
         $articlecode = $request->articlecode;
         $articlename = $request->articlename;
         $categoryid = $request->categoryid;
 
         $displaycategory = DB::table('category')
-        ->select('id','category_name')
+        ->select('id','code','category_name')
         ->where('status',1)
         ->get();
 
@@ -50,7 +51,7 @@ class ArticleController extends Controller
             ]
         )
         ->with('categoryname',$categoryname)
-        //->with('articlecode',$articlecode)
+        ->with('categorycode',$categorycode)
         ->with('articlename',$articlename)
         ->with('categoryid',$categoryid)
         ;
@@ -69,14 +70,17 @@ class ArticleController extends Controller
     public function categorystore(Request $request)
     {
         $categoryname = $request->categoryname;
+        $categorycode = $request->categorycode;
 
         $messages =
         [
             'categoryname.required' => "Category Name is Required",
+            'categorycode.required' => "Category Name is Required",
         ];
 
         $rules = [
             'categoryname' => 'required',
+            'categorycode' => 'required',
         ];
 
         $validate =  Validator::make($request->all(),$rules,$messages);
@@ -87,7 +91,7 @@ class ArticleController extends Controller
         }
         else {
 
-            $data=array('category_name'=>$categoryname);
+            $data=array('category_name'=>$categoryname,'code'=>$categorycode);
             DB::table('category')->insertOrIgnore($data);
          
             return redirect()->route('articles.index')
@@ -176,7 +180,7 @@ class ArticleController extends Controller
     public function editcategory($id)
     {
         $editdisplaycategory = DB::table('category')
-        ->select("id","category_name")
+        ->select("id","code","category_name")
         ->where('id',$id)
         ->get();
 
@@ -222,15 +226,18 @@ class ArticleController extends Controller
     public function updatecategory(Request $request,$id)
     {
         $category_name = $request->category_name;
+        $categorycode = $request->categorycode;
 
 
         $request->validate([
             'category_name' => 'required',
+            'categorycode' => 'required',
         ]);
     
         DB::table('category')
         ->where('id', $id)
         ->update(['category_name' => $category_name,
+                    'code' => $categorycode,
                 ]);
     
         return redirect()->route('articles.index')

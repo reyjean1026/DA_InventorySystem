@@ -68,7 +68,7 @@
                                     <select class="form-control" name="articleid" id="articleid" style="width:100%" required>
                                         <option value=''>Please Select</option> 
                                         @foreach ($displayarticle as $row)
-                                        <option value='{{$row->id}}'>{{$row->article}}</option> 
+                                        <option value='{{$row->id}}'>{{$row->code}}-{{$row->article}}</option> 
                                         @endforeach
                                     </select>
                                 </div>
@@ -126,7 +126,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                 <p>Unit Value</p>
-                                    <input class="form-control" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}" required>
+                                    <input class="form-control" step=".01" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}" required>
                                 </div>
                             </div>
                     </div>
@@ -229,8 +229,16 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->date_acquired}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->propertynumber}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->unitmeasure}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->value}}</td>
-                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center"></td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{number_format($row->value, 2, '.', ',') }}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">
+                                                                        <?php
+                                                                            $quantity = $row->unitmeasure;
+                                                                            $unitvalue = $row->value;
+                                                                            $sum = 0;
+                                                                            (float)$sum+= (float)$quantity*(float)$unitvalue ;
+                                                                            echo number_format($sum, 2, '.', ',');
+                                                                            ?>
+                                                                        </td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->registeredstatus}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->fullname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>

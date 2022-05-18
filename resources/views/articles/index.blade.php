@@ -28,17 +28,22 @@
                 <form action="{{ url('storecategory') }}" method="POST" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                        <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Name" value="{{ old('categoryname') }}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button class="btn btn-success btn-sm ms-auto">Add Category</button>
-                                    </div>
-                                </div> 
+                                    <input class="form-control" autocomplete="off" type="text" name="categoryname" id="categoryname" placeholder="Category Code" value="{{ old('categoryname') }}" required>
+                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input class="form-control" autocomplete="off" type="text" name="categorycode" id="categorycode" placeholder="Category Name" value="{{ old('code') }}" required>
+                                 </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-sm ms-auto">Add Category</button>
+                                </div>
+                            </div> 
+                    </div>
                 </form>
               <div class="row">
                 <div class="col-md-12">
@@ -46,6 +51,7 @@
                         <table id="tblcategory" class="display" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category Code</th>
                                     <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category Name</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
@@ -53,6 +59,7 @@
                             <tbody>
                                 @foreach ($displaycategory as $row)
                                 <tr>
+                                    <td class="text-secondary text-xs font-weight-bold align-middle text-right">{{$row->code}}</td>
                                     <td class="text-secondary text-xs font-weight-bold align-middle text-right">{{$row->category_name}}</td>
                                     <td class="text-secondary text-xs font-weight-bold align-middle text-center">
                                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ url('articles/deactivatecategory/'.$row->id) }}"onsubmit="return confirm('Are you sure you wish to delete this record?');">
@@ -66,6 +73,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category Code</th>
                                     <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category Name</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>

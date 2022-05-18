@@ -11,7 +11,7 @@
         @include('layouts.partials.messages')
 
         <div class="form-group form-floating mb-3">
-            <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+            <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" autocomplete="off" required autofocus>
             <label for="floatingName">Email</label>
             @if ($errors->has('email'))
                 <span class="text-danger text-left">{{ $errors->first('email') }}</span>

@@ -32,10 +32,10 @@
                         <strong>Article:</strong>
                             <select class="form-control" name="editarticleid" id="editarticleid" style="width:100%" required>
                                     @foreach ($displayproperty as $row)
-                                    <option value='{{$row->articleid}}'>{{$row->article}}</option>
+                                    <option value='{{$row->articleid}}'>{{$row->code}}-{{$row->article}}</option>
                                     @endforeach
                                     @foreach ($displayarticle as $row)
-                                    <option value='{{$row->id}}'>{{$row->article}}</option> 
+                                    <option value='{{$row->id}}'>{{$row->code}}-{{$row->article}}</option> 
                                     @endforeach
                             </select>    
                     </div>
@@ -92,17 +92,17 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                    <strong>Unit Value:</strong>
+                    <strong>Quantity:</strong>
                         @foreach ($displayproperty as $row)
-                        <input class="form-control" autocomplete="off" type="number" name="editunitofmeasure" id="editunitofmeasure" placeholder="Unit of Measure" value="{{$row->unitmeasure}}" required>
+                        <input class="form-control" autocomplete="off" type="number" name="editunitofmeasure" id="editunitofmeasure" placeholder="Quantity" value="{{$row->unitmeasure}}" required>
                         @endforeach
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                    <strong>Quantity:</strong>
+                    <strong>Unit Value:</strong>
                         @foreach ($displayproperty as $row)
-                        <input class="form-control" autocomplete="off" type="number" name="editunitvalue" id="editunitvalue" placeholder="Unit Value" value="{{$row->value}}" required>
+                        <input class="form-control" step=".01" autocomplete="off" type="number" name="editunitvalue" id="editunitvalue" placeholder="Unit Value" value="{{$row->value}}" required>
                         @endforeach
                     </div>
                 </div>

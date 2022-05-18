@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('acquired/{id}/edit', 'AcquiredController@edit');
         Route::put('acquired/{id}', 'AcquiredController@update');
         Route::post('acquired/deactivate/{id}', 'AcquiredController@deactivate');
+        Route::get('/srpcppe', 'ReportController@index')->name('reports.srpccppe');
+        Route::get('/rpcppe', 'ReportController@index1')->name('reports.rpcppe');
+        Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     });
 
     

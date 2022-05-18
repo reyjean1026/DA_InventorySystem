@@ -50,13 +50,13 @@ class AcquiredController extends Controller
         //$registered = $request->registered;
 
         $displayarticle = DB::table('article')
-        ->select("article.id as id","article.code as code","article.article as article","category.category_name as categoryname")
+        ->select("article.id as id","article.code as codes","article.article as article","category.code as code","category.category_name as categoryname")
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->get();
 
         $displayproperty = DB::table('inventory')
         ->select(DB::raw("CONCAT(personneldb.tbl_user.NAME_F,' ',personneldb.tbl_user.NAME_L) AS fullname"),
-        "inventorydb.inventory.id as id","inventorydb.category.category_name as category","inventorydb.article.article as article",
+        "inventorydb.inventory.id as id","inventorydb.category.code as code","inventorydb.category.category_name as category","inventorydb.article.article as article",
         "inventorydb.inventory.description as description","inventorydb.inventory.quantity as unitmeasure","inventorydb.inventory.unit_value as value",
         "inventorydb.inventory.date_acquired as date_acquired","inventorydb.inventory.property_number as propertynumber",
         "inventorydb.inventory.status as status","inventorydb.inventory.assigned_to as assigned_to","inventorydb.inventory.remarks as remarks",
@@ -327,7 +327,7 @@ class AcquiredController extends Controller
     public function edit($id)
     {
         $displayproperty = DB::table('inventory')
-        ->select("inventory.id as id","category.category_name as category","article.id as articleid","article.article as article",
+        ->select("inventory.id as id","inventorydb.category.code as code","category.category_name as category","article.id as articleid","article.article as article",
         "inventory.description as description","inventory.quantity as unitmeasure","inventory.unit_value as value",
         "inventory.date_acquired as date_acquired","inventory.property_number as propertynumber","inventory.received_date as received_date",
         "inventory.status as status","inventory.assigned_to as assigned_to","inventory.remarks as remarks",
@@ -338,7 +338,7 @@ class AcquiredController extends Controller
         ->get();
 
         $displayarticle = DB::table('article')
-        ->select("article.id as id","article.code as code","article.article as article","category.category_name as categoryname")
+        ->select("article.id as id","article.code as codes","article.article as article","category.code as code","category.category_name as categoryname")
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->get();
 

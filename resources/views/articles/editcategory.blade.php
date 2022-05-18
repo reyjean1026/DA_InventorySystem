@@ -30,6 +30,14 @@
                             <div class="form-group">
                                 <strong>Category Name:</strong>
                                 @foreach ($editdisplaycategory as $row)
+                                <input type="text" name="categorycode" id="categorycode"  class="form-control" value="{{$row->code}}" required>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Category Name:</strong>
+                                @foreach ($editdisplaycategory as $row)
                                 <input type="text" name="category_name" id="category_name"  class="form-control" value="{{$row->category_name}}" required>
                                 @endforeach
                             </div>
