@@ -30,7 +30,7 @@
   <script src="{{asset('assets/plugins/select2.min.js')}}"></script>
 
 </head>
-         
+        
 <body class="g-sidenav-show   bg-gray-100">
     <div class="min-height-300 bg-primary position-absolute w-100">
         <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 no-print" id="sidenav-main">
@@ -46,15 +46,15 @@
              <div id="sidenav-collapse-main">
                 <ul class="nav navbar-nav">
                     <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}">
-                        <a class="nav-link" href="{{ url('home') }}">
+                        <a class="nav-link {{ Request::segment(1) === 'home' ? 'active' : null }}" href="{{ url('home') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-chart-bar-32 text-primary text-sm opacity-10"></i>
                             </div>
                             <span class="nav-link-text ms-1">Dashboard</span>
                         </a>
-                    </li>
+                    </li>            
                     <li class="{{ Request::segment(1) === 'articles' ? 'active' : null }}">
-                        <a class="nav-link " href="{{ url('articles') }}">
+                        <a class="nav-link {{ Request::segment(1) === 'articles' ? 'active' : null }}" href="{{ url('articles') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
                             </div>
@@ -62,34 +62,32 @@
                         </a>
                     </li>
                     <li class="{{ Request::segment(1) === 'inventory' ? 'active' : null }}">
-                        <a class="nav-link " href="{{ url('inventory') }}">
+                        <a class="nav-link {{ Request::segment(1) === 'inventory' ? 'active' : null }}" href="{{ url('inventory') }}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-books text-info text-sm opacity-10"></i>
                             </div>
                             <span class="nav-link-text ms-1">Inventory</span>
                         </a>
                     </li>
-                    <li class="nav-item mt-3">
-                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">REPORTS</h6>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ url('rpcppe') }}">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                                 <i class="ni ni-collection text-success text-sm opacity-10"></i>
                             </div>
-                            <span class="nav-link-text ms-1">RPCPPE</span>
+                            <span class="nav-link-text ms-1">REPORTS</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ url('srpcppe') }}">
-                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-dark text-sm opacity-10"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">SRPCPPE</span>
-                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"><a class="nav-link" href="{{ url('rpcppe') }}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp RPCPPE</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('srpcppe') }}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp SRPCPPE</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('unserviciable') }}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp UNSERVICIABLE</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SIGN OUT</h6>
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SIGN OUT</h6>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="{{ url('logout') }}">
@@ -139,7 +137,7 @@
                     </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> 
             <!-- End Navbar -->
             @yield('content')
            <!-- <footer class="footer pt-3">

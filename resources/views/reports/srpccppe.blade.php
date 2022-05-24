@@ -47,7 +47,7 @@
             table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 90%;
+            /*width: 90%;*/
             margin: auto;
             table-layout: fixed;
             }
@@ -97,7 +97,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <table id="tblsrpcppe" class="display" style="width:90%">
+                                                <table id="tblsrpcppe" class="display" style="width:80%">
                                                     <thead>
                                                         <tr>
                                                             <th class="">ACCOUNT TITLE</th>

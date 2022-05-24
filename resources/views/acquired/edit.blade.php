@@ -22,13 +22,13 @@
                     </div>
                 </div>     
              @foreach ($displayproperty as $row)
-            <form action="{{ url('acquired/'.$row->id) }}" id="editinventory" method="POST">
+            <form action="{{ url('acquired/'.$row->id) }}" id="editinventory" method="POST" enctype="multipart/form-data">
             @endforeach
                 @csrf
                 @method('PUT')
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                         <strong>Article:</strong>
                             <select class="form-control" name="editarticleid" id="editarticleid" style="width:100%" required>
                                     @foreach ($displayproperty as $row)
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Registered Employee?:</strong>
                         <select class="form-control" name="editregistered" id="editregistered" style="width:100%" required>
                             @foreach ($displayproperty as $row)
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Assigned to:</strong>
                         <select class="form-control" name="editassignedto" id="editassignedto" style="width:100%">
                             <option value="">Assigned to</option> 
@@ -67,7 +67,7 @@
                     </div>  
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="Description">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Property Number:</strong>
                         @foreach ($displayproperty as $row)
                         <textarea class="form-control" autocomplete="off" type="text" name="editdescription" id="editdescription" placeholder="Description" required>{{$row->description}}</textarea>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                      <strong>Date Acquired:</strong>
                         @foreach ($displayproperty as $row)
                         <input class="form-control" autocomplete="off" type="date" name="editdate_acquired" id="editdate_acquired" value="{{$row->date_acquired}}" required>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Property Number:</strong>
                         @foreach ($displayproperty as $row)
                         <input class="form-control" autocomplete="off" type="text" name="editpropertynumber" id="editpropertynumber" placeholder="Property Number" value="{{$row->propertynumber}}" required>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Quantity:</strong>
                         @foreach ($displayproperty as $row)
                         <input class="form-control" autocomplete="off" type="number" name="editunitofmeasure" id="editunitofmeasure" placeholder="Quantity" value="{{$row->unitmeasure}}" required>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Unit Value:</strong>
                         @foreach ($displayproperty as $row)
                         <input class="form-control" step=".01" autocomplete="off" type="number" name="editunitvalue" id="editunitvalue" placeholder="Unit Value" value="{{$row->value}}" required>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Received Date:</strong>
                         @foreach ($displayproperty as $row)
                         <input class="form-control" autocomplete="off" type="date" name="editreceived_date" id="editreceived_date" placeholder="Unit Value" value="{{$row->received_date}}">
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+                    <div class="form-group" style="font-size:14px;">
                     <strong>Status:</strong>
                         <select class="form-control" name="editstatusid" id="editstatusid" style="width:100%" required>
                             <option value=''>Status of Equipment</option> 
@@ -126,8 +126,18 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                    <strong>Remarks:</strong>
+                    <div class="form-group" style="font-size:14px;">
+                    <strong>Attachment:</strong>
+                        @foreach ($displayproperty as $row)
+                        <p>Retrieved File: <a href="{{URL::to('/')}}/attachments/{{$row->attachment}}" target="_blank">{{$row->attachment}}</a></p>
+                         Note:<i> If you want to update/change your file use this field, otherwise, leave it blank.</i>
+                        <input class="form-control" autocomplete="off" type="file" name="editattachment" id="editattachment" placeholder="Attachment">
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group" style="font-size:14px;">
+                    <strong>Remarks:</strong>  
                         @foreach ($displayproperty as $row)
                         <textarea class="form-control" autocomplete="off" type="text" name="editremarks" id="editremarks" placeholder="Remarks">{{$row->remarks}}</textarea>
                         @endforeach

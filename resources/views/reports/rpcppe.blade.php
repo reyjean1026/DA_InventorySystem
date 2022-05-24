@@ -102,7 +102,7 @@
                         <button class="no-print" onClick="window.print()">Print</button>
                         <a class="btn btn-primary no-print" href="{{ route('acquired.index') }}"> Back</a>
                         @foreach ($maincategory as $row)
-                        <div class="card">
+                        <div class="card pagebreak">
                             <div class="card-header pb-0">
                                 <center>
                                     <p class="mb-0">
@@ -124,11 +124,11 @@
                                                         <th rowspan="2" width="25%">DESCRIPTION</th>
                                                         <th rowspan="2" width="5%">DATE ACQUIRED</th>
                                                         <th rowspan="2" width="5%">PROPERTY NUMBER</th>
-                                                        <th rowspan="2" width="5%">UNIT OF MEASURE</th>
+                                                        <th rowspan="2" width="5%">QUANTITY</th>
                                                         <th rowspan="2" width="5%">UNIT VALUE</th>
-                                                        <th rowspan="2" width="8%">TOTAL VALUE</th>
+                                                        <th rowspan="2" width="7%">TOTAL VALUE</th>
                                                         <th colspan="2" width="8%">SHORTAGE/OVERAGE</th>
-                                                        <th rowspan="2" width="7%">STATUS</th>
+                                                        <th rowspan="2" width="8%">STATUS</th>
                                                         <th rowspan="2" width="8%">ASSIGNED</th>
                                                         <th rowspan="2" width="12%">REMARKS</th>
                                                     </tr>
@@ -145,7 +145,7 @@
                                                             <td>{{$row1->description}}</td>
                                                             <td>{{$row1->date_acquired}}</td>
                                                             <td>{{$row1->property_number}}</td>
-                                                            <td>{{$row1->quantity}}</td>
+                                                            <td><center>{{$row1->quantity}}</center></td>
                                                             <td style="text-align:right;">{{number_format($row1->unitvalue, 2, '.', ',') }}</td>
                                                             <td style="text-align:right;">
                                                             <?php

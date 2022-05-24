@@ -63,8 +63,8 @@
                      @csrf
                     <div class="row">
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <p>Article</p>
+                                <div class="form-group" style="font-size:14px;">
+                                    Article
                                     <select class="form-control" name="articleid" id="articleid" style="width:100%" required>
                                         <option value=''>Please Select</option> 
                                         @foreach ($displayarticle as $row)
@@ -74,8 +74,8 @@
                                 </div>
                             </div> 
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <p>Registered Employee?</p>
+                                <div class="form-group" style="font-size:14px;">
+                                    Registered Employee?
                                     <select class="form-control" name="registered" id="registered" style="width:100%" required>
                                         <option value=''>Please Select</option>                
                                         <option value='YES'>YES</option> 
@@ -84,8 +84,8 @@
                                 </div>
                             </div> 
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Assigned to</p>
+                                <div class="form-group" style="font-size:14px;">
+                                     Assigned to
                                     <select class="form-control" name="assignedto" id="assignedto" style="width:100%">
                                         <option value=''>Please Select</option> 
                                         @foreach ($displayemployee as $row)
@@ -98,48 +98,48 @@
                     </div>
                     <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                <p>Description</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Description
                                     <textarea class="form-control" autocomplete="off" type="text" name="description" id="description" placeholder="Description" required>{{ old('description') }}</textarea>
                                 </div>
                             </div>
                     </div>
                     <div class="row">
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Date acquired</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Date acquired
                                     <input class="form-control" autocomplete="off" type="date" name="date_acquired" id="date_acquired" value="{{ old('date_acquired') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Property Number</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Property Number
                                     <input class="form-control" autocomplete="off" type="text" name="propertynumber" id="propertynumber" placeholder="Property Number" value="{{ old('propertynumber') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Quantity</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Quantity
                                     <input class="form-control" autocomplete="off" type="number" name="unitofmeasure" id="unitofmeasure" placeholder="Quantity" value="{{ old('unitofmeasure') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Unit Value</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Unit Value
                                     <input class="form-control" step=".01" autocomplete="off" type="number" name="unitvalue" id="unitvalue" placeholder="Unit Value" value="{{ old('unitvalue') }}" required>
                                 </div>
                             </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Received Date</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Received Date
                                     <input class="form-control" autocomplete="off" type="date" name="received_date" id="received_date">
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                <p>Equipment Status</p>
+                                <div class="form-group" style="font-size:14px;">
+                                Equipment Status
                                     <select class="form-control" name="statusid" id="statusid" style="width:100%" required>
                                         <option value=''>Please Select</option> 
                                         <option value='SERVICIABLE'>SERVICIABLE</option> 
@@ -149,8 +149,16 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                <p>Remarks</p>
+                                <div class="form-group" style="font-size:14px;">
+                                    Attachments <i style="font-size:9px;">(You can upload a file in any forms relating to your supplies and equipment to use as evidence or record keeping)</i>
+                                    <input class="form-control" autocomplete="off" type="file" name="attachment" id="attachment">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" style="font-size:14px;">
+                                Remarks
                                     <textarea class="form-control" autocomplete="off" type="text" name="remarks" id="remarks" placeholder="Remarks">{{ old('remarks') }}</textarea>
                                 </div>
                             </div>
@@ -214,6 +222,7 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Attachment</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                                                 
@@ -243,6 +252,7 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->fullname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center"><a href="{{URL::to('/')}}/attachments/{{$row->attachment}}" target="_blank">{{$row->attachment}}</a></td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">
                                                                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ url('acquired/deactivate/'.$row->id) }}" onsubmit="return confirm('Are you sure you wish to delete this record?');">
@@ -271,6 +281,7 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Attachment</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                                                     </tr>
@@ -296,6 +307,8 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Attachment</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                          <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>-->
                                                                     </tr>
@@ -309,6 +322,8 @@
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->regstatus}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->fullname}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->tempname}}</td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center"><a href="{{URL::to('/')}}/attachments/{{$row->attachment}}" target="_blank">{{$row->attachment}}</a></td>
+                                                                        <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->status}}</td>
                                                                         <td class="text-secondary text-xs font-weight-bold align-middle text-center">{{$row->remarks}}</td>
                                                                         <!--<td class="text-secondary text-xs font-weight-bold align-middle text-center">
                                                                             <button type="button" class="badge badge-sm bg-gradient-primary btnSelect" id="ModalinputDatabaseName" data-bs-toggle="modal" data-bs-target="#exampleModal">Transfer</button>
@@ -324,6 +339,8 @@
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Registered Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned to</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Temp Name</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Attachment</th>
+                                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remarks</th>
                                                                         <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>-->
                                                                     </tr>
@@ -366,8 +383,8 @@
                         <div class="card-header pb-0">
                         <div class="row">
                                     <div class="col-md-6">
-                                       <div class="form-group">
-                                       <p>Property Number</p>
+                                       <div class="form-group" style="font-size:14px;">
+                                       Property Number
                                            <span class="form-control" id="modalpropnumber" name="modalpropnumber"></span>
                                        </div>
                                      </div>    
@@ -379,8 +396,8 @@
                                 <input type="text" id="textid" name="textid" hidden>
                                 <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                            <p>Registered Employee?</p>
+                                            <div class="form-group" style="font-size:14px;">
+                                            Registered Employee?
                                                 <select class="form-control" name="transmodalregistered" id="transmodalregistered" style="width:100%" required>
                                                     <option value=''>Please Select</option>                
                                                     <option value='YES'>YES</option> 
@@ -389,8 +406,8 @@
                                             </div>
                                         </div> 
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                            <p>Assigned to</p>
+                                            <div class="form-group" style="font-size:14px;">
+                                            Assigned to
                                                 <select class="form-control" name="transmodalassignedto" id="transmodalassignedto" style="width:100%">
                                                     <option value="">Please Select</option> 
                                                     @foreach ($displayemployee as $row)
@@ -403,14 +420,14 @@
                                 </div>
                                 <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                            <p>Received Date</p>
+                                            <div class="form-group" style="font-size:14px;">
+                                            Received Date
                                                 <input class="form-control" autocomplete="off" type="date" name="transmodaltransferred_date" id="transmodaltransferred_date">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                            <p>Equipment Status</p>
+                                            <div class="form-group" style="font-size:14px;">
+                                            Equipment Status
                                                 <select class="form-control" name="transmodalstatusid" id="transmodalstatusid" style="width:100%" required>
                                                     <option value=''>Please Select</option> 
                                                     <option value='SERVICIABLE'>SERVICIABLE</option> 
@@ -422,9 +439,18 @@
                                 </div>
                                 <div class="row">
                                        
+                                       <div class="col-md-12">
+                                           <div class="form-group" style="font-size:14px;">
+                                            Attachments <i style="font-size:9px;">(You can upload a file in any forms relating to your supplies and equipment to use as evidence or record keeping)</i>
+                                            <input class="form-control" autocomplete="off" type="file" name="mdalattachment" id="mdalattachment"> 
+                                           </div>
+                                       </div>
+                               </div>
+                                <div class="row">
+                                       
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                            <p>Remarks</p>
+                                            <div class="form-group" style="font-size:14px;">
+                                            Remarks
                                                 <textarea class="form-control" autocomplete="off" type="text" name="transmodalremarks" id="transmodalremarks" placeholder="Remarks"></textarea>
                                             </div>
                                         </div>

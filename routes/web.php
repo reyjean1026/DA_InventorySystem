@@ -84,7 +84,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('acquired/deactivate/{id}', 'AcquiredController@deactivate');
         Route::get('/srpcppe', 'ReportController@index')->name('reports.srpccppe');
         Route::get('/rpcppe', 'ReportController@index1')->name('reports.rpcppe');
+        Route::get('/unserviciable', 'ReportController@indexunserviciable')->name('reports.unserviciable');
         Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
+        
     });
 
     
@@ -98,3 +101,4 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
