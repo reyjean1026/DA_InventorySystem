@@ -33,6 +33,7 @@ class ReportController extends Controller
         ->leftJoin('category', 'category.id', '=', 'article.category_id')
         ->where('inventory.in_status',1)
         ->where('inventory.status','SERVICIABLE')
+        ->where('inventory.unit_value','>',15000)
         ->groupBy("category.category_name")
         ->get()
         ->toArray();
@@ -65,6 +66,7 @@ class ReportController extends Controller
       ->leftJoin('inventorydb.category', 'inventorydb.category.id', '=', 'inventorydb.article.category_id')
       ->where('inventorydb.inventory.in_status',1)
       ->where('inventory.status','SERVICIABLE')
+      ->where('inventory.unit_value','>',15000)
       //->groupBy('inventorydb.category.id','personneldb.main_employment_profile.DivisionDesc')
       ->get()->toArray();
        

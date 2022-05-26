@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //API
 Auth::routes();
 
+Route::get('/showcategory', [App\Http\Controllers\ApiController::class, 'showcategory'])->name('showcategory');
 Route::get('/showarticle', [App\Http\Controllers\ApiController::class, 'showarticle'])->name('showarticle');
+Route::get('/showinventory', [App\Http\Controllers\ApiController::class, 'showinventory'])->name('showinventory');

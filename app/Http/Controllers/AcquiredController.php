@@ -65,6 +65,7 @@ class AcquiredController extends Controller
         ->leftJoin('inventorydb.category', 'inventorydb.category.id', '=', 'inventorydb.article.category_id')
         ->leftJoin('personneldb.tbl_user', 'personneldb.tbl_user.EMP_NO', '=', 'inventorydb.inventory.assigned_to')
         ->where('inventorydb.inventory.in_status',1)
+        //->paginate(25)
         ->get()
         ->toArray();
 
